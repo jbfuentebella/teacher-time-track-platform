@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', env('MAIL_USERNAME')),
+        'name' => env('MAIL_FROM_NAME', env('APP_NAME')),
     ],
 
     /*
@@ -132,5 +132,22 @@ return [
     */
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | https://stackoverflow.com/questions/30556773/how-to-fix-stream-socket-enable-crypto-ssl-operation-failed-with-code-1
+    |--------------------------------------------------------------------------
+    |
+    | Needed to implement for email sending via gmail
+    | Comment when using other email sending medium
+    |
+    */
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
 
 ];
