@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class InitialAccountSeeder extends Seeder
 {
@@ -11,12 +12,14 @@ class InitialAccountSeeder extends Seeder
      */
     public function run()
     {
+        $password = Hash::make('admin123');
+
         DB::table('temp_accounts')->insert([
             'first_name' => 'Admin',
             'last_name' => 'Admin',
-            'username' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin123'),
+            'username' => 'admin',
+            'email' => 'jbfuentebella25@gmail.com',
+            'password' => $password,
             'role' => 'admin',
             'verification_status' => 'verified',
             'verification_date' => '2019-02-18',
@@ -29,9 +32,9 @@ class InitialAccountSeeder extends Seeder
             'temp_account_id' => 1,
             'first_name' => 'Admin',
             'last_name' => 'Admin',
-            'username' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin123'),
+            'username' => 'admin',
+            'email' => 'jbfuentebella25@gmail.com',
+            'password' => $password,
             'role' => 'admin',
             'verification_date' => '2019-02-18',
             'slug' => '1234567891234567',
