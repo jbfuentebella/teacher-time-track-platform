@@ -25,6 +25,7 @@ class CreateAccountsTable extends Migration
             $table->date('verification_date')->nullable(true)->default(NULL);
             $table->string('slug', 16)->unique()->nullable(false);
             $table->integer('updated_by')->default(0);
+            $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('temp_account_id')->references('id')->on('temp_accounts');
