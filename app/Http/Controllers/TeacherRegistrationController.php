@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TempAccount;
 use App\Http\Requests\RegisterTempAccountRequest;
+
 use Illuminate\Support\Facades\Hash;
 
 class TeacherRegistrationController extends Controller
@@ -25,7 +26,7 @@ class TeacherRegistrationController extends Controller
      */
     public function create()
     {
-        return view('registration.create');
+        return view('teachers.registration');
     }
 
     /**
@@ -47,34 +48,6 @@ class TeacherRegistrationController extends Controller
             'success', 
             'Account verification has been sent. Please login to your email and verify your account.'
         );
-        return redirect()->route('login');
-    }
-
-   /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  $token
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($token)
-    {
-        $tempAccount = TempAccount::where('verification_token', $token)->first();
-
-        if (empty($tempAccount)) {
-            session()->flash('error', 'Your link looks like broken.');
-        } else if (in_array($tempAccount->verification_status, [
-            TempAccount::VERIFICATION_DONE, 
-            TempAccount::VERIFICATION_VERIFIED
-        ])) {
-            session()->flash('error', 'Account has already been verified.');
-        } else {
-            $tempAccount->verification_status = TempAccount::VERIFICATION_VERIFIED;
-            $tempAccount->verification_date = date('Y-m-d');
-            $tempAccount->update();
-
-            session()->flash('success', 'Your account has successfully verified.');   
-        }
-
         return redirect()->route('login');
     }
 }
