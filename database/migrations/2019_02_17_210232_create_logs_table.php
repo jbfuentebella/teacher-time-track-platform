@@ -16,7 +16,7 @@ class CreateLogsTable extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('account_id');
-            $table->enum('role', ['clock-in', 'clock-out'])->nullable(false);
+            $table->enum('status', ['clock-in', 'clock-out'])->nullable(false);
             $table->date('login_dt')->nullable(false);
             $table->time('login_time')->nullable(false);
             $table->date('logout_dt')->nullable(true)->default(NULL);
