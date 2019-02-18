@@ -17,8 +17,8 @@ class CreateTempAccountsTable extends Migration
             $table->increments('id');
             $table->string('first_name')->nullable(false);
             $table->string('last_name')->nullable(false);
-            $table->string('username')->unique()->nullable(false);
-            $table->string('email')->unique()->nullable(false);
+            $table->string('username')->nullable(false);
+            $table->string('email')->nullable(false);
             $table->string('password')->nullable(false);
             $table->enum('role', ['admin', 'teacher'])->nullable(false);
             $table->enum('verification_status', ['pending', 'verified', 'done'])->nullable(false)->default('pending');
