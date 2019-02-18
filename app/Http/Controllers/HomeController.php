@@ -23,6 +23,19 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (@auth()->user()->isTeacher()) {
+            $latestLogRecord = @auth()->user()->getLogLatestRecordStatus(); 
+            $url = 'clock-out.edit';
+            
+            if (empty($latestLogRecord) || $latestLogRecord == \App\Log::STATUS_CLOCK_OUT) {
+                $url = 'clock-in.create';
+            }
+
+            return redirect()->route($url);
+        } else {
+            // admin
+        }
+
         return view('home');
     }
 }
