@@ -14,10 +14,6 @@ class Account extends Authenticatable
     const STATUS_ACTIVE = 'active';
     const STATUS_LOCKED = 'locked';
 
-    const STATUS_INACTIVE = 'inactive';
-    const STATUS_ACTIVE = 'active';
-    const STATUS_LOCKED = 'locked';
-
     const ROLE_ADMIN = 'admin';
     const ROLE_TEACHER = 'teacher';
 
@@ -39,6 +35,30 @@ class Account extends Authenticatable
         return $this->role == self::ROLE_TEACHER;
     }
 
+    public function getLogLatestRecordStatus()
+    {
+        $log = self::getLastestLogRecord();
+
+        if (!empty($log)) {
+            return $log->status;
+        }
+
+        return null;
+    }
+
+    public function logs()
+    {
+        return $this->hasMany('App\Log');
+    }
+
+
+    public static function getLastestLogRecord()
+    {
+        return auth()->user()->logs()
+            ->orderBy('id', 'desc')
+            ->first();
+    }
+
     public static function generateUniqueSlug()
     {
         $newSlug = str_random(16);
@@ -51,4 +71,6 @@ class Account extends Authenticatable
 
         return $newSlug;   
     }
+
+    
 }
