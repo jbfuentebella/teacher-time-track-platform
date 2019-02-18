@@ -27,7 +27,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        return view('teachers.index', [
+            'teachers' => Log::orderBy('id', 'desc')->get()
+        ]);
     }
 
     /**
@@ -37,7 +39,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create');
+        return view('teachers.create');
     }
 
     /**
@@ -88,7 +90,7 @@ class TeacherController extends Controller
             return redirect()->route('login');
         }
 
-        return view('teacher.success', [
+        return view('teachers.success', [
             'log' => $log
         ]);
     }
@@ -101,7 +103,7 @@ class TeacherController extends Controller
      */
     public function edit(Account $account)
     {
-        return view('teacher.edit');
+        return view('teachers.edit');
     }
 
     /**
