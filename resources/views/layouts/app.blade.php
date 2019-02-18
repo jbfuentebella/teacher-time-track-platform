@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -45,13 +45,22 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('teacher-registration.create') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}" >{{ __('Admins') }}</a>
-                            </li>
+                            @if (@auth()->user()->isAdmin()) 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('logout') }}" >{{ __('Admins') }}</a>
+                                </li>
+                            @endif
+
+                             @if (@auth()->user()->isTeacher()) 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('logout') }}" >{{ __('Admins') }}</a>
+                                </li>
+                            @endif
+                            
                             
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}" 
@@ -59,9 +68,9 @@
                                         {{ __('Logout') }}
                                 </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         @endguest
                     </ul>
@@ -70,6 +79,19 @@
         </nav>
 
         <main class="py-4">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+
             @yield('content')
         </main>
     </div>

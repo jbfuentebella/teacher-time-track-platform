@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// registration
+Route::get('/register-new-teacher', 'TeacherRegistrationController@create')->name('teacher-registration.create');
+Route::post('/register-new-teacher', 'TeacherRegistrationController@store')->name('teacher-registration.store');
+
+// verification - teacher
+Route::get('/verify-new-teacher/{token}', 'TeacherRegistrationController@edit')->name('teacher-registration.edit');
+
+
+
