@@ -58,7 +58,7 @@ class TeacherRegistrationController extends Controller
      */
     public function edit($token)
     {
-        $tempAccount = TempAccount::where(['verification_token', $token])->first();
+        $tempAccount = TempAccount::where('verification_token', $token)->first();
 
         if (empty($tempAccount)) {
             session()->flash('error', 'Your link looks like broken.');
