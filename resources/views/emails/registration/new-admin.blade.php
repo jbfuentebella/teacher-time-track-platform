@@ -1,6 +1,6 @@
 @component('mail::message')
 
-<p>Hi Teacher {{ $tempAccount->first_name }},</p>
+<p>Hi Admin {{ $tempAccount->first_name }},</p>
 
 <p>Verify your account by click the button below!</p>
 

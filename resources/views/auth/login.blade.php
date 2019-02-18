@@ -63,13 +63,6 @@
 
                         <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
-                                @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                            <div class="col-md-8 offset-md-4">
                                 New Teacher? Click
                                 @if (Route::has('password.request'))
                                     <a href="{{ route('teacher-registration.create') }}">

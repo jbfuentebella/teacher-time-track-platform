@@ -51,7 +51,11 @@
                         @else
                             @if (@auth()->user()->isAdmin()) 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('logout') }}" >{{ __('Admins') }}</a>
+                                    <a class="nav-link" href="{{ route('admins.index') }}" >{{ __('Admins') }}</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('teachers.index') }}" >{{ __('Teachers') }}</a>
                                 </li>
                             @endif
 
