@@ -3,7 +3,6 @@
 @section('title', 'Register New Teacher')
 
 @section('content')
-
 <div class="container">
     <div class="card">
         <div class="card-header"><h3>@yield('title')</h3></div>

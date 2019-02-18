@@ -26,5 +26,10 @@ Route::post('/register-new-teacher', 'TeacherRegistrationController@store')->nam
 // verification - teacher
 Route::get('/verify-new-teacher/{token}', 'TeacherRegistrationController@edit')->name('teacher-registration.edit');
 
-
+// teacher
+Route::get('/clock-in', 'TeacherController@create')->name('clock-in.create');
+Route::post('/clock-in', 'TeacherController@store')->name('clock-in.store');
+Route::get('/clock-out', 'TeacherController@edit')->name('clock-out.edit');
+Route::patch('/clock-out', 'TeacherController@update')->name('clock-out.update');
+Route::get('/clock-success/{slug}', 'TeacherController@show')->name('clock-success.show');
 

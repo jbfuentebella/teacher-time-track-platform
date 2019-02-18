@@ -55,10 +55,19 @@
                                 </li>
                             @endif
 
-                             @if (@auth()->user()->isTeacher()) 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('logout') }}" >{{ __('Admins') }}</a>
-                                </li>
+                             @if (@auth()->user()->isTeacher())
+                                <?php 
+                                    $latestLogRecord = @auth()->user()->getLogLatestRecordStatus(); 
+                                ?>
+                                @if (empty($latestLogRecord) || $latestLogRecord == \App\Log::STATUS_CLOCK_OUT)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('clock-in.create') }}" >{{ __('Clock In') }}</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('clock-out.edit') }}" >{{ __('Clock Out') }}</a>
+                                    </li>
+                                @endif
                             @endif
                             
                             
