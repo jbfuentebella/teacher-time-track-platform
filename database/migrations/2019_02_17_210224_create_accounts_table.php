@@ -22,6 +22,7 @@ class CreateAccountsTable extends Migration
             $table->string('email')->unique()->nullable(false);
             $table->string('password')->nullable(false);
             $table->enum('role', ['admin', 'teacher'])->nullable(false);
+            $table->enum('status', ['active', 'inactive', 'locked'])->nullable(false)->default('active');
             $table->date('verification_date')->nullable(true)->default(NULL);
             $table->string('slug', 16)->unique()->nullable(false);
             $table->integer('updated_by')->default(0);

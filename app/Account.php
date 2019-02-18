@@ -19,7 +19,7 @@ class Account extends Authenticatable
 
     public $timestamps = true;
 
-    protected $fillable = ['first_name', 'last_name', 'username', 'email'];
+    protected $fillable = ['first_name', 'last_name', 'username', 'email', 'status'];
 
     protected $guarded = ['id', 'temp_account_id', 'password', 'role', 'verification_token', 'verification_status'];
 
