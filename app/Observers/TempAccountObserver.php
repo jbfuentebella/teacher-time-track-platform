@@ -5,6 +5,8 @@ namespace App\Observers;
 use App\TempAccount;
 use App\Account;
 use App\Mail\NewTeacherEmail;
+use App\Mail\NewAdminEmail;
+
 use Illuminate\Support\Facades\Mail;
 
 class TempAccountObserver
@@ -29,7 +31,11 @@ class TempAccountObserver
      */
     public function created(TempAccount $tempAccount)
     {
-        Mail::to($tempAccount->email)->send(new NewTeacherEmail($tempAccount));
+        $email = ($tempAccount->role == TempAccount::ROLE_ADMIN) ? 
+            new NewAdminEmail($tempAccount) : 
+            new NewTeacherEmail($tempAccount);
+            
+        Mail::to($tempAccount->email)->send($email);
     }
 
     /**
@@ -50,39 +56,6 @@ class TempAccountObserver
             $this->createAccount($tempAccount);
         }
 
-    }
-
-    /**
-     * Handle the temp account "deleted" event.
-     *
-     * @param  \App\TempAccount  $tempAccount
-     * @return void
-     */
-    public function deleted(TempAccount $tempAccount)
-    {
-        //
-    }
-
-    /**
-     * Handle the temp account "restored" event.
-     *
-     * @param  \App\TempAccount  $tempAccount
-     * @return void
-     */
-    public function restored(TempAccount $tempAccount)
-    {
-        //
-    }
-
-    /**
-     * Handle the temp account "force deleted" event.
-     *
-     * @param  \App\TempAccount  $tempAccount
-     * @return void
-     */
-    public function forceDeleted(TempAccount $tempAccount)
-    {
-        //
     }
 
     private function updateOtherPendingRegistrations(TempAccount $tempAccount)
