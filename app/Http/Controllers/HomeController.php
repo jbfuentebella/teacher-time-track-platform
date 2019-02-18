@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $url = 'admins.index';
+        
         if (@auth()->user()->isTeacher()) {
             $latestLogRecord = @auth()->user()->getLogLatestRecordStatus(); 
             $url = 'clock-out.edit';
@@ -33,7 +35,7 @@ class HomeController extends Controller
 
             return redirect()->route($url);
         } else {
-            // admin
+            return redirect()->route($url);
         }
 
         return view('home');
